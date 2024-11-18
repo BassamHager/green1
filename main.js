@@ -16,7 +16,7 @@ process.chdir(repoPath);
 // Generate content in the file
 fs.appendFileSync(
   path.join(repoPath, logsFileName),
-  `Automated update: ${new Date().toISOString()}\n`,
+  `\nAutomated update: ${new Date().toISOString()}\n`,
   "utf8"
 );
 
