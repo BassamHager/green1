@@ -4,7 +4,8 @@ const path = require("path");
 
 // Configuration
 const repoPath = "/Users/douaahasan/Projects/learn/github/green1"; // Replace with the path to your repo
-const fileName = "main.js";
+// const fileName = "main.js";
+const logsFileName = "logs.js";
 const commitMessage = "Automated commit";
 const githubToken =
   "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"; // Replace with your GitHub token
@@ -15,7 +16,7 @@ process.chdir(repoPath);
 
 // Generate content in the file
 fs.appendFileSync(
-  path.join(repoPath, fileName),
+  path.join(repoPath, logsFileName),
   `Automated update: ${new Date().toISOString()}\n`,
   "utf8"
 );
@@ -55,4 +56,3 @@ try {
 } catch (error) {
   console.log(error);
 }
-Automated update: 2024-11-18T03:13:02.025Z
