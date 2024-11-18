@@ -20,7 +20,7 @@ fs.appendFileSync(
   "utf8"
 );
 
-// Function to execute shell commands
+// Function to execute shell commands.
 const runCommand = (command) => {
   return new Promise((resolve, reject) => {
     exec(command, (error, stdout, stderr) => {
