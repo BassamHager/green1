@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script defer src="./main.js"></script>
+  </head>
+  <body style="background-color: aqua">
+    <h1>Stay Green :)</h1>
+    <div id="id"></div>
+    <script>
+      const container = document.getElementById("id");
+      container.innerHTML = `<h2>${`\nAutomated update: ${new Date().toLocaleTimeString()} ${new Date().toLocaleDateString()}\n`}</h2>`;
+    </script>
+  </body>
+</html>
