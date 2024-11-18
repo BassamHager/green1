@@ -3,11 +3,12 @@ const fs = require("fs");
 const path = require("path");
 
 // Configuration
-const repoPath = "/path/to/your/repo"; // Replace with the path to your repo
-const fileName = "auto_generated_file.txt";
+const repoPath = "/Users/douaahasan/Projects/learn/github/green1"; // Replace with the path to your repo
+const fileName = "main.js";
 const commitMessage = "Automated commit";
-const githubToken = "your_personal_access_token"; // Replace with your GitHub token
-const githubRepo = "yourusername/your-repo-name"; // Replace with your username and repo
+const githubToken =
+  "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"; // Replace with your GitHub token
+const githubRepo = "BassamHager/green1"; // Replace with your username and repo
 
 // Change directory to the repo
 process.chdir(repoPath);
@@ -37,7 +38,7 @@ const runCommand = (command) => {
 // Automate git commands
 const automateGit = async () => {
   try {
-    await runCommand(`git add ${fileName}`);
+    await runCommand(`git add .`);
     await runCommand(`git commit -m "${commitMessage}"`);
     await runCommand(
       `git push https://${githubToken}@github.com/${githubRepo}.git main`
@@ -50,3 +51,4 @@ const automateGit = async () => {
 
 // Run the automation
 automateGit();
+Automated update: 2024-11-18T03:07:56.364Z
