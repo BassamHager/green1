@@ -50,5 +50,9 @@ const automateGit = async () => {
 };
 
 // Run the automation
-automateGit();
-Automated update: 2024-11-18T03:11:17.170Z
+try {
+  automateGit();
+} catch (error) {
+  console.log(error);
+}
+Automated update: 2024-11-18T03:13:02.025Z
