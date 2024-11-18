@@ -14,9 +14,10 @@ const githubRepo = "BassamHager/green1"; // Replace with your username and repo
 process.chdir(repoPath);
 
 // Generate content in the file
+const timeAndDate = `${new Date().toLocaleTimeString()} ${new Date().toLocaleDateString()}`;
 fs.appendFileSync(
   path.join(repoPath, logsFileName),
-  `\nAutomated update: ${new Date().toLocaleTimeString()} ${new Date().toLocaleDateString()}\n`,
+  `\nAutomated update: ${timeAndDate}\n`,
   "utf8"
 );
 
@@ -38,7 +39,7 @@ const runCommand = (command) => {
 const automateGit = async () => {
   try {
     await runCommand(`git add .`);
-    await runCommand(`git commit -m "${commitMessage}"`);
+    await runCommand(`git commit -m "Update: ${timeAndDate}"`);
     await runCommand(
       `git push https://${githubToken}@github.com/${githubRepo}.git master`
     );
