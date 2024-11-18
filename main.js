@@ -41,7 +41,7 @@ const automateGit = async () => {
     await runCommand(`git add .`);
     await runCommand(`git commit -m "${commitMessage}"`);
     await runCommand(
-      `git push https://${githubToken}@github.com/${githubRepo}.git main`
+      `git push https://${githubToken}@github.com/${githubRepo}.git master`
     );
     console.log("Commit and push successful.");
   } catch (error) {
@@ -51,4 +51,4 @@ const automateGit = async () => {
 
 // Run the automation
 automateGit();
-Automated update: 2024-11-18T03:07:56.364Z
+Automated update: 2024-11-18T03:09:04.213Z
