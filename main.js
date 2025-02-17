@@ -42,7 +42,8 @@ const automateGit = async () => {
     await runCommand(`git add .`);
     await runCommand(`git commit -m "Update: ${timeAndDate}"`);
     await runCommand(
-      `git push https://${githubToken}@github.com/${githubRepo}.git master`
+      `git push origin HEAD:master`
+      // `git push https://${githubToken}@github.com/${githubRepo}.git master`
     );
     console.log("Commit and push successful.");
   } catch (error) {
