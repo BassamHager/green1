@@ -47,9 +47,15 @@ const runCommand = (command, options = {}) => {
 const automateGit = async () => {
   await runCommand(`git add .`);
   await runCommand(`git commit -m "Update: ${timeAndDate}"`);
+  // await runCommand(
+  //   `git push https://${githubToken}@github.com/${githubRepo}.git ${githubBranch}`
+  // );
   await runCommand(
-    `git push https://${githubToken}@github.com/${githubRepo}.git ${githubBranch}`
+    `git push https://${
+      githubRepo.split("/")[0]
+    }:${githubToken}@github.com/${githubRepo}.git ${githubBranch}`
   );
+
   console.log("Commit and push successful.");
 };
 
