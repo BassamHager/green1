@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 // Configuration
-const repoPath = "/Users/douaahasan/Projects/learn/github/green1"; // Replace with the path to your repo
+const repoPath = process.env.GITHUB_REPO_PATH; // Replace with the path to your repo
 const logsFileName = "logs.txt";
 const commitMessage = "Automated commit";
 const githubToken = process.env.GITHUB_TOKEN;
