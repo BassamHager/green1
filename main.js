@@ -2,27 +2,36 @@ const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-// Configuration
-const repoPath = process.env.GITHUB_REPO_PATH; // Replace with the path to your repo
-const logsFileName = "logs.txt";
-const commitMessage = "Automated commit";
+// Load environment variables
+const repoPath = process.env.GITHUB_REPO_PATH;
 const githubToken = process.env.GITHUB_TOKEN;
 const githubRepo = process.env.GITHUB_REPO;
+const githubBranch = process.env.GITHUB_BRANCH || "master"; // fallback to master
 
-// Change directory to the repo
-process.chdir(repoPath);
+if (!repoPath || !githubToken || !githubRepo) {
+  console.error("Missing required environment variables.");
+  process.exit(1);
+}
 
-// Generate content in the file
+const logsFileName = "logs.txt";
 const timeAndDate = `${new Date().toLocaleTimeString()} ${new Date().toLocaleDateString()}`;
-fs.appendFileSync(
-  path.join(repoPath, logsFileName),
-  `\nAutomated update: ${timeAndDate}\n`,
-  "utf8"
-);
 
-const runCommand = (command) => {
+const logFilePath = path.join(repoPath, logsFileName);
+
+try {
+  fs.appendFileSync(
+    logFilePath,
+    `\nAutomated update: ${timeAndDate}\n`,
+    "utf8"
+  );
+} catch (err) {
+  console.error("Failed to write to logs:", err);
+  process.exit(1);
+}
+
+const runCommand = (command, options = {}) => {
   return new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
+    exec(command, { cwd: repoPath, ...options }, (error, stdout, stderr) => {
       if (error) {
         reject(`Error: ${error.message}`);
       } else if (stderr) {
@@ -34,23 +43,22 @@ const runCommand = (command) => {
   });
 };
 
-// Automate git commands
 const automateGit = async () => {
+  await runCommand(`git add .`);
+  await runCommand(`git commit -m "Update: ${timeAndDate}"`);
+  await runCommand(
+    `git push https://${githubToken}@github.com/${githubRepo}.git ${githubBranch}`
+  );
+  console.log("Commit and push successful.");
+};
+
+const main = async () => {
   try {
-    await runCommand(`git add .`);
-    await runCommand(`git commit -m "Update: ${timeAndDate}"`);
-    await runCommand(
-      `git push https://${githubToken}@github.com/${githubRepo}.git master`
-    );
-    console.log("Commit and push successful.");
+    await automateGit();
   } catch (error) {
-    console.error("Failed:", error);
+    console.error("Git automation failed:", error);
+    process.exit(1);
   }
 };
 
-// Run the automation
-try {
-  automateGit();
-} catch (error) {
-  console.log(error);
-}
+main();
