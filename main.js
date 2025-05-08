@@ -6,9 +6,8 @@ const path = require("path");
 const repoPath = "/Users/douaahasan/Projects/learn/github/green1"; // Replace with the path to your repo
 const logsFileName = "logs.txt";
 const commitMessage = "Automated commit";
-const githubToken =
-  "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"; // Replace with your GitHub token
-const githubRepo = "BassamHager/green1"; // Replace with your username and repo
+const githubToken = process.env.GITHUB_TOKEN;
+const githubRepo = process.env.GITHUB_REPO;
 
 // Change directory to the repo
 process.chdir(repoPath);
